@@ -5,6 +5,20 @@
 When using the Intel X11 driver, virtual outputs `VIRTUAL1` and `VIRTUAL2` are created: you should see them at the bottom of `xrandr`’s output, listed as `disconnected`.
 No reliable workaround is yet known for other drivers.
 
+### Creating a new virtual outputs
+If you have a intel gpu and can not see a VIRTUAL output when running `xrandr` command. 
+Add this snippet:
+```sh
+
+Section "Device"
+    Identifier "intelgpu0"
+    Driver "intel"
+    Option "VirtualHeads" "1"
+EndSection
+```
+to a newly created file in this path`/etc/X11/xorg.conf.d/20-intel.conf`. Restart the computer and check `xrandr` output again. 
+
+
 ## Configure a virtual second output
 
 In the following, it is assumed that we want to configure the `VIRTUAL1` output for use on the reMarkable.
